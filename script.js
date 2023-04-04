@@ -26,7 +26,7 @@ const getDefinition = function(word) {
 }
 
 submitButton.addEventListener('click', function(e) {
-    e.preventDefault();
+    e.preventDefault
     userWord.textContent = userInput.value;
     getDefinition(userInput);
     console.log(userInput);

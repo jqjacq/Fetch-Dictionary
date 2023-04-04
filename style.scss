@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Roboto:wght@100&display=swap');
-
 $defaultPadding: 1rem 1.5rem;
 
 * {
@@ -17,6 +15,9 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    form {
+        display: block;
+    }
     .userInput {
         padding: $defaultPadding;
     }
@@ -25,19 +26,12 @@ h1 {
         background-color: transparent;
     }
 }
-.result-container {
+.userWord {
+    font-size: 1.5rem;
+    padding: $defaultPadding;
+}
+.result {
     display: block;
     padding: $defaultPadding;
-    .result {
-        padding: $defaultPadding;
-    }
-    .userWord{
-        font-size: 1.75rem;
-    }
-    .definition{
-        font-size: 1.5rem;
-    }
-    .example{
-        font-size: 1.25rem;
-    }
+    font-size: 1.25rem;
 }

@@ -2,42 +2,45 @@
 
 //https://api.dictionaryapi.dev/api/v2/entries/en/<word>
 
-const form = document.querySelector('form');
 const userInput = document.querySelector('.userInput');
-const userWord = document.querySelector('.userWord')
-const result = document.querySelector('.result');
-// const renderWord = function(userInput) {
-    //     console.log(userInput);
-    //     const html = `
-    //         <div class="result userWord centerText">${userInput[0].word}</div>
-    //         <div class="result definition">${userInput[0].meanings.definition}</div>
-    //     `
-    //     resultContainer.insertAdjacentElement('afterbegin', html)
-    // }
-    // const getJSONAPI = function (url) {
-        //     return fetch(url).then(response => {
-            //       if (!response.ok) throw new Error(` (${response.status})`);
-            //       return response.json();
-            //     });
-            //   };
-form.addEventListener('submit', function(e) {
+const submitButton = document.querySelector('.submitButton');
+const displayWord = document.querySelector('.userWord');
+const displayDefinition = document.querySelector('.result');
+
+async function getWordData(word) {
+    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+    const data = await response.json();
+    return data;
+}
+
+submitButton.addEventListener('click', (e) => {
     e.preventDefault();
     const word = userInput.value;
-    const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-    // getJSONAPI(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-    fetch(url) 
-    .then(response => response.json())
-    .then(data => { 
-            const definition = data[0].meanings[0].definitions[0].definition;
-            userWord.textContent = `Definition of "${word}": `;
-            userWord.style.fontWeight = "bold";
-            result.textContent = `${definition}`;
-            // result.textContent = definition;
-        })
-        .catch(error => console.error(`${error}`))
+    getWordData(word).then(data => {
+        const definitions = data[0].meanings.map(meaning => meaning.definitions[0].definition);
+        
+        let definitionList = '';
+        definitions.forEach(
+            definition => {
+                definitionList += `<li>${definition}</li>`;
+            });
+            displayWord.textContent = word;
+            displayDefinition.innerHTML = definitionList;
+        });
     });
-    // submitButton.addEventListener('click', function(e) {
-    // userWord.textContent = userInput.value;
-    // e.preventDefault
-    // getDefinition();
-// });
+    
+// const form = document.querySelector('form');
+    // form.addEventListener('submit', function(e) {
+//     e.preventDefault();
+//     const word = userInput.value;
+//     const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+//     fetch(url) 
+//     .then(response => response.json())
+//     .then(data => { 
+//             const definition = data[0].meanings[0].definitions[0].definition;
+//             userWord.textContent = `Definition of "${word}": `;
+//             userWord.style.fontWeight = "bold";
+//             result.textContent = `${definition}`;
+//         })
+//         .catch(error => console.error(`${error}`))
+//     });

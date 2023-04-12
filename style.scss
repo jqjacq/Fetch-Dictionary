@@ -1,9 +1,9 @@
 $defaultPadding: 1rem 1.5rem;
+$defaultBackground:  rgba(255, 255, 255, 0.85);
 
 * {
     box-sizing: border-box;
-    font-family: 'Kumbh Sans', sans-serif;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Nunito', 'Roboto', sans-serif;
 }
 body {
     background-image: url("background1.jpg");
@@ -12,11 +12,23 @@ body {
 }
 h1 {
     font-size: 2.5em;
+    background-color: $defaultBackground;
+    border-radius: 5px;
+}
+h2 {
+    font-size: 2rem;
+}
+h3 {
+    font-size: 1.5rem;
+}
+h4 {
+    font-size: 1.25rem;
 }
 .dictionary-container {
     border-radius: 1px;
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: $defaultPadding
+    background-color: $defaultBackground;
+    padding: $defaultPadding;
+    border-radius: 10px;
 }
 .bold {
     font-weight: bold;
@@ -39,6 +51,7 @@ h1 {
         font-weight: 500;
         background-color: rgba(5, 5, 5, 0.8);
         color: white;
+        border-radius: 5px;
     }
     .submitButton {
         border: none;
@@ -46,17 +59,15 @@ h1 {
     }
 }
 .result-container {
-    padding-bottom: 40%;
+    padding-bottom: 25%;
     opacity: 0;
     transition: opacity 2s ease-in-out;
     .userWord {
-        font-size: 1.5rem;
         padding: $defaultPadding;
     }
     .result {
         display: block;
         padding: $defaultPadding;
-        font-size: 1.25rem;
         height: 100%;
     }
 }

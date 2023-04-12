@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/ab62147ef2.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.scss">
     <script defer src="script.js"></script>
     <title>Word Search</title>
@@ -12,10 +15,10 @@
 <body>
     <h1 class="centerText bold"> Dictionary </h1>
     <div class="dictionary-container">
-        <h2 class="centerText"> Search Word </h2>
+        <h2 class="centerText"> Search Word Definition </h2>
         <div class="input-container">
                 <form>
-                    <input type="text" class="userInput"></input>
+                    <input type="text" class="userInput" autofocus></input>
                     <button type="submit" class="submitButton">
                         <i class="fa-solid fa-magnifying-glass fa-1x"></i>
                     </button>
@@ -24,7 +27,7 @@
         <div class="result-container">
             <h3 class="userWord centerText bold"> Loading Word... </h3>
             <ol>
-            <div class="result bold"> Loading Definition... </div>
+            <h4 class="result bold"> Loading Definition... </h4>
             </ol>
         </div>
     </div>

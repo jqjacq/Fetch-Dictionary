@@ -6,7 +6,11 @@ const submitButton = document.querySelector('.submitButton');
 const resultContainer = document.querySelector('.result-container')
 const displayWord = document.querySelector('.userWord');
 const displayDefinition = document.querySelector('.result');
-
+const content = document.querySelector('.content')
+const displayError = function(errorMessage) {
+    const errorElement = document.getElementById('error')
+    errorElement.textContent = errorMessage;
+} 
 const wait = function () {
     return new Promise(function (resolve) {
         resultContainer.style.opacity = 1;
@@ -28,23 +32,36 @@ async function getWordData(word) {
 }
 
 async function getDefinition() {
-    const word = userInput.value;
-    const data = await getWordData(word);
-
-    if (Array.isArray(data)) {
-            const definitions = data[0].meanings.map(meaning => meaning.definitions[0].definition);
-            let definitionList = '';
-            definitions.forEach(
-                definition => {
-                    definitionList += `<li>${definition}</li>`;
-                });
-                displayDefinition.innerHTML = definitionList;
-                displayWord.textContent = word;
+    try {
+        const word = userInput.value;
+        const data = await getWordData(word);
+    
+        if (Array.isArray(data)) {
+                const definitions = data[0].meanings.map(meaning => meaning.definitions[0].definition);
+                let definitionList = '';
+                definitions.forEach(
+                    definition => {
+                        definitionList += `<li>${definition}</li>`;
+                    });
+                    displayDefinition.innerHTML = definitionList;
+                    displayWord.textContent = word;
+            } else {
+                displayWord.textContent = `The word '${word}' does not exist.`;
+                displayDefinition.innerHTML = "This word does not exist in our dictionary. Otherwise, it may be a misspelling. Please try another word. "
+            }
+    } catch (error) {
+        if (error instanceof TypeError && error.message === 'Failed to fetch') { 
+            displayError(`A chicken ate the word. Just kidding, here's the reason.  ${error}. 
+            What does this even mean? Maybe check your internet connection and try again.`);
+            console.error(`Error: A chicken ate the word, try again later.`);
+            content.style.display = "none";
         } else {
-            displayWord.textContent = `The word '${word}' does not exist.`;
-            displayDefinition.innerHTML = "This word does not exist in our dictionary. Otherwise, it may be a misspelling. Please try another word. "
+            console.error(error);
         }
+        
     }
+
+}
 
 submitButton.addEventListener('click', async function (e) {
     e.preventDefault();
